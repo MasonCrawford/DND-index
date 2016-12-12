@@ -3168,7 +3168,7 @@
             bar.attr('mode', options.mode);
             element.addClass('uk-active');
 
-            $body.css({width: window.innerWidth - scrollbarwidth, height: window.innerHeight}).addClass('uk-offcanvas-page');
+            $body.css({width: (window.innerWidth - scrollbarwidth) - bar.outerWidth() , height: window.innerHeight}).addClass('uk-offcanvas-page');
 
             if (options.mode == 'push' || options.mode == 'reveal') {
                 $body.css((rtl ? 'margin-right' : 'margin-left'), (rtl ? -1 : 1) * (bar.outerWidth() * dir));
@@ -3733,7 +3733,7 @@
 
             // init UIkit components
             if (this.options.connect) {
-                
+
                 this.switcher = UI.switcher(this.element, {
                     toggle    : '>li:not(.uk-tab-responsive)',
                     connect   : this.options.connect,
