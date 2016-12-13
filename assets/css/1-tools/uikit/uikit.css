@@ -7559,7 +7559,7 @@ a.uk-thumbnail:focus {
  */
 .uk-offcanvas-page {
   /* 1 */
-  /*position: fixed;*/
+  position: fixed;
   /* 2 */
   -webkit-transition: margin-left 0.3s ease-in-out;
   transition: margin-left 0.3s ease-in-out;

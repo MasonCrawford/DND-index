@@ -11,13 +11,12 @@
   <!-- <script src="assets\js\1-tools\uikit\core\offcanvas.js"></script> -->
   <script src="assets\js\1-tools\uikit\core\button.js"></script>
   <script src="assets\js\1-tools\uikit\components\sticky.js"></script>
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/main.min.css" />
   <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" />
   <link rel="stylesheet" href="assets/css/1-tools/uikit/components/sticky.css" />
 </head>
-
+<div class="page-main">
 <body id="index-body">
-  <div class="page-home">
     <header class="uk-panel uk-panel-box uk-width-1-1" style="padding-top: 0; padding-bottom: 0; z-index: 3; position: fixed;">
       <a class="uk-navbar-toggle uk-hidden-notouch" data-uk-offcanvas="{target:'#navtouch'}"></a>
 
@@ -198,8 +197,9 @@
         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
     <footer class=" uk-panel-box "></footer>
-  </div>
 </body>
+</div>
+
 <script type="text/javascript">
   $.UIkit.$doc.on({'show.uk.offcanvas': function(){
 	          document.getElementById("iframe").classList.add('uk-margin-remove');
