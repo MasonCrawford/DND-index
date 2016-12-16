@@ -15,18 +15,16 @@
   <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" />
   <link rel="stylesheet" href="assets/css/1-tools/uikit/components/sticky.css" />
 </head>
-<div class="page-main">
 <body id="index-body" class="mc-index-body" style="position: static;">
-    <header class="uk-panel uk-panel-box uk-width-1-1" style="padding-top: 0; padding-bottom: 0; z-index: 1; position: fixed;  top: 0; left: 0;">
-      <a class="uk-navbar-toggle uk-hidden-notouch" data-uk-offcanvas="{target:'#navtouch'}"></a>
+<div class="page-main">
+<header class="uk-panel uk-panel-box uk-width-1-1 mc-index-header">
+  <a class="uk-navbar-toggle uk-hidden-notouch" data-uk-offcanvas="{target:'#navtouch'}"></a>
 
-      <a href="#navnotouch" class="uk-navbar-toggle uk-hidden-touch" data-uk-offcanvas="{mode:'reveal'}"></a>
-    </header>
-
-    <div id="navnotouch" class="uk-offcanvas uk-hidden-touch" style="background: none; Width:0px;">
+  <a id="nav-toggle-notouch"href="#navnotouch" class="uk-navbar-toggle uk-hidden-touch" data-uk-offcanvas="{mode:'reveal'}"></a>
+</header>
+    <div id="navnotouch" class="uk-offcanvas uk-hidden-touch mc-index-nav-div">
       <div class="uk-offcanvas-bar" style="background: none;">
         <div class="uk-panel-box uk-height-viewport">
-
           <h3>Nav side</h3>
           <ul class="uk-nav uk-nav-side" style="background: none;">
             <li class="uk-active"><a href="#">Active</a></li>
@@ -198,19 +196,25 @@
     </div>
     <footer class=" uk-panel-box "></footer>
 </body>
+<input type="button" class="uk-button" onclick="UIkit.offcanvas.hide([force = false])">
 </div>
 
 <script type="text/javascript">
   $.UIkit.$doc.on({'show.uk.offcanvas': function(){
 	          document.getElementById("iframe").classList.add('uk-margin-remove');
+            document.getElementById("nav-toggle-notouch").OnClick=callme;
 	  				<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
 	      },
 	      'hide.uk.offcanvas': function(){
 	  			document.getElementById("iframe").classList.remove('uk-margin-remove');
-					<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
+          document.getElementById("nav-toggle-notouch").OnClick=callme;
+          					<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
 
 	      }
 	  });
-</script>
+    function callme()
+    {
+        alert("You have clicked me!");
+    }</script>
 
 </html>
