@@ -22,7 +22,9 @@
 
   <a id="nav-toggle-notouch"href="#navnotouch" class="uk-navbar-toggle uk-hidden-touch" data-uk-offcanvas="{mode:'reveal'}"></a>
 </header>
-    <div id="navnotouch" class="uk-offcanvas uk-hidden-touch mc-index-nav-div">
+    <div id="navnotouch" class="uk-offcanvas uk-hidden-touch mc-index-nav-div" style="width:001px;">
+      <span class="uk-navbar-toggle" style="position:relative; top:0; left:270px;" onclick="UIkit.offcanvas.hide([force = false])"></span>
+
       <div class="uk-offcanvas-bar" style="background: none;">
         <div class="uk-panel-box uk-height-viewport">
           <h3>Nav side</h3>
@@ -196,25 +198,19 @@
     </div>
     <footer class=" uk-panel-box "></footer>
 </body>
-<input type="button" class="uk-button" onclick="UIkit.offcanvas.hide([force = false])">
 </div>
 
 <script type="text/javascript">
   $.UIkit.$doc.on({'show.uk.offcanvas': function(){
 	          document.getElementById("iframe").classList.add('uk-margin-remove');
-            document.getElementById("nav-toggle-notouch").OnClick=callme;
 	  				<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
 	      },
 	      'hide.uk.offcanvas': function(){
 	  			document.getElementById("iframe").classList.remove('uk-margin-remove');
-          document.getElementById("nav-toggle-notouch").OnClick=callme;
-          					<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
+          	<!-- console.log(document.getElementById("index-body").style.width + document.getElementById("index-body").style.marginleft ); -->
 
 	      }
 	  });
-    function callme()
-    {
-        alert("You have clicked me!");
-    }</script>
+</script>
 
 </html>
