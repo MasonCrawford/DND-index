@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" style="margin-top: 001px;"class="mc-index-html" ng-app="app" ng-controller="controller">
+
+<head>
+  <title>Spell search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="assets\js\1-tools\jquery-2.1.4.min.js"></script>
+  <script src="assets\js\functions.js"></script>
+  <script src="assets\js\1-tools\uikit\uikit.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!-- <script src="assets\js\1-tools\uikit\core\button.js"></script> -->
+  <script src="assets\js\1-tools\uikit\components\sticky.js"></script>
+  <script type="text/javascript" src="assets\js\3-pages\app.js"></script>
+  <!-- <script type="text/json" src="spells.json"></script> -->
+  <link rel="stylesheet" href="assets\css\1-tools\uikit\uikit.gradient.css" />
+  <!-- <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" /> -->
+  <link rel="stylesheet" href="assets/css/1-tools/uikit/components/sticky.css" />
+</head>
+<div class="uk-button-group">
+  <button ng-click="logSearch(search)" class="uk-button">test search</button>
+  <button ng-click="logSearch(spellorderby)"  class="uk-button">test orderby</button>
+</div>
+  <body class="uk-margin-left uk-margin-right" style="padding-top: 45px;">
+    <form class="uk-form uk-panel-box uk-margin uk-form-stacked">
+      <div class="uk-text-center">
+        <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+          <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-row-first">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="">order by</label>
+              <div class="uk-form-controls">
+              <div class="uk-button-group">
+                <div class="uk-button-dropdown" data-uk-dropdown={mode: 'hover'}>
+                  <button class="uk-button">{{spellorderby}}</i></button>
+                  <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                      <ul class="uk-nav uk-nav-dropdown">
+                        <li>
+                          <a ng-click="spellorderby = 'name'">Name</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'source'">Source</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'level'">Level</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'school'">School</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'duration'">Duration</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'range'">Range</a>
+                        </li>
+                        <li>
+                          <a ng-click="spellorderby = 'castingTime'">Casting Time</a>
+                        </li>
+                      </ul>
+                    </ul>
+                  </div>
+                </div>
+<!-- NEED to add work to this to toggel orderby side  -->
+                <button class="uk-button" ng-class="{reverse: reverse}" ng-click="sortBy()"><i class="uk-icon-caret-down"></i></button>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-3 uk-width-medium-1-3">
+            <div class="uk-panel uk-panel-box">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-name">Name</label>
+              <div class="uk-form-controls">
+                <input id="s-f-name" type="text" ng-model="search.name" ng-init="search.name =''" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-3 uk-width-medium-1-3">
+            <div class="uk-panel uk-panel-box">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-Description">description</label>
+              <div class="uk-form-controls">
+                <input id="s-f-Description" type="text" ng-model="search.description" ng-init="search.description =''" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-width-1-2">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-school">school</label>
+              <div class="uk-form-controls">
+              <select id="s-f-school" name="schoolfilter" ng-model="search.school">
+                <option selected="" value="">all</option>
+                <option value="Necromancy">Necromancy</option>
+                <option value="Abjuration">Abjuration</option>
+                <option value="Conjuration">Conjuration</option>
+                <option value="Evocation">Evocation</option>
+                <option value="Transmutation">Transmutation</option>
+                <option value="Divination">Divination</option>
+                <option value="Illusion">Illusion</option>
+                <option value="Enchantment">Enchantment</option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-width-1-2">
+            <div class="uk-panel uk-panel-box" style="padding-left: 0px; padding-right: 0px;">
+                <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-class">Class</label>
+                <div class="uk-form-controls">
+                  <div class="uk-button-group">
+                    <div class="uk-button-dropdown" data-uk-dropdown={mode: 'hover'}>
+                      <button class="uk-button uk-button-mini">{{search.classes}}</button>
+                      <div class="uk-dropdown uk-dropdown-small">
+                        <ul class="uk-nav uk-nav-dropdown">
+                          <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                              <a ng-click="search.classes = null">All</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Sorcerer'">Sorcerer</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Wizard'">Wizard</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Druid'">Druid</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Ranger'">Ranger</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Cleric'">Cleric</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Paladin'">Paladin</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Bard'">Bard</a>
+                            </li>
+                            <li>
+                              <a ng-click="search.classes = 'Warlock'">Warlock</a>
+                            </li>
+                          </ul>
+                        </ul>
+                      </div>
+                    </div><div class="uk-button-dropdown" data-uk-dropdown={mode: 'hover'}>
+                      <button class="uk-button uk-button-mini" style="font-size:8px;" disabled>Sub</i></button>
+                      <div class="uk-dropdown uk-dropdown-small">
+                        <ul class="uk-nav uk-nav-dropdown">
+                          <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                              <a ng-click="spellorderby = 'name'">Name</a>
+                            </li>
+                          </ul>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="uk-button-dropdown" data-uk-dropdown={mode: 'hover'}>
+                 	  <button class="uk-button uk-button-mini" style="font-size:8px;"ng-if="search.classes=='Paladin'" ng-model="search.oaths">{{search.oaths}}</button>
+                 	  <div class="uk-dropdown uk-dropdown-small">
+                 		<ul class="uk-nav uk-nav-dropdown">
+                 		  <ul class="uk-nav uk-nav-dropdown">
+                        <li>
+                   			  <a ng-click="search.oaths = null">all</a>
+                   			</li>
+                   			<li>
+                   			  <a ng-click="search.oaths = 'Vengeance'">Vengeance</a>
+                   			</li>
+                   			<li>
+                   			 <a ng-click="search.oaths = 'Devotion'">Devotion</a>
+                   			</li>
+                   			<li>
+                   			  <a ng-click="search.oaths = 'Ancients'">Ancients</a>
+                   			</li>
+                 			</ul>
+                 		</ul>
+                 	  </div>
+                 	</div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-width-1-2">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-level">level</label>
+              <div class="uk-form-controls">
+                <select id="s-f-Level" name="level-filter" ng-model="search.Level">
+                  <option selected value="">all</option>
+                  <option value="0">Cantrip</option>
+                  <option value="1">1st</option>
+                  <option value="2">2ed</option>
+                  <option value="3">3rd</option>
+                  <option value="4">4th</option>
+                  <option value="5">5th</option>
+                  <option value="6">6th</option>
+                  <option value="7">7th</option>
+                  <option value="8">8th</option>
+                  <option value="9">9th</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-width-1-2">
+            <div class="uk-panel uk-panel-box">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-duration">duration</label>
+              <div class="uk-form-controls">
+                <select id="s-f-duration" name="duration-filter" ng-model="search.duration">
+              	   <option selected="" value="">all</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-container-center uk-grid-width-auto">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">
+              <label style="text-transform:capitalize; padding-right:10px; padding-left:10px;" for="s-f-castingtime">casting time</label>
+              <select id="s-f-castingtime" name="castingtime-filter" ng-model="search.castingtime">
+            	<option selected="" value="">all</option>
+              </select>
+            </div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-container-center uk-grid-width-auto">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">5</div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-container-center uk-grid-width-auto">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">5</div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-container-center uk-grid-width-auto">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">5</div>
+          </div>
+          <div class="uk-width-large-1-5 uk-width-medium-1-5 uk-container-center uk-grid-width-auto">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary">5</div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+    <spell ng-repeat="x in allspells.spells| orderBy: spellorderby | removenull:search |filter:search">
+      <br><br>
+      <div style="border-bottom: 1px solid #CDCBCB;" ng-click="logSearch(search)" ng-mouseover="hoverIn(x)" ng-mouseleave="hoverOut()">
+      <h1> {{x.name}} </h1> <h3>{{x.source}}</h3>
+      <div ng-switch="x.level">
+              <small ng-switch-when="0">{{x.school}} cantrip</small>
+              <small ng-switch-when="1">{{x.level}}st level {{x.school}}</small>
+              <small ng-switch-when="2">{{x.level}}nd level {{x.school}}</small>
+              <small ng-switch-default>{{x.level}}th level {{x.school}}</small>
+        </div>
+        <h2>{{x.duration}}, {{x.range}}, {{x.castingTime}}</h2>
+      <h4 ng-show="hoverEdit" class="animate-show">{{x.emote|interpolateFilter:scope}}</h4>
+        <p class="des">
+          {{x.description}}
+        </p>
+      <div ng-show="saveHoverEdit">
+        <small>{{x.save.ability}} saveing throw, {{x.save.condition}} {{x.save.damage}} + {{x.save.damageBonus}} {{x.save.damageType}} damage {{x.save.saveFailure}} or {{x.save.saveSuccess}} on a susseful save</small>
+      </div>
+      <div ng-show="attackHoverEdit">
+        <small>{{x.attack.type}} attack. {{x.attack.damage}} {{x.attack.damageType}}. {{x.attackxcastingStat}}</small>
+      </div>
+      <div ng-show="damageHoverEdit">
+        {{x.damage.damage}} {{x.damage.damageType}} damage
+      </div>
+      <div ng-show="healHoverEdit">
+         heal {{x.heal.amount}} <mod ng-if="x.heal.castingStat"> + spell casting modifier</mod> <bonus ng-if="x.heal.bonus != null">+ {{x.heal.bonus}}</bonus>
+      </div>
+      <div ng-show="hoverEdit">
+            <h4 >{{x.effect}}</h4>
+            <p style=display:table-cell ; ng-switch="x.components.verbal">
+              <small ng-switch-when="true">verbal,&#160;</small>
+            </p>
+            <p style=display:table-cell ; ng-switch="x.components.somatic">
+              <small ng-switch-when="true">somatic,&#160;</small>
+            </p>
+            <p style=display:table-cell ; ng-switch="x.components.material">
+              <small ng-switch-when="true"> material {{x.components.materialMaterial}}</small>
+            </p>
+            <p ng-switch="c" ng-repeat="c in x.classes">
+              <small ng-switch-default>{{c}}</small>
+              <small ng-switch-when="Cleric"> {{c}}    <small ng-repeat="d in x.domains">{{d}}, </small></small>
+              <small ng-switch-when="Druid"> {{c}}    <small ng-repeat="ci in x.circles">{{ci}}, </small></small>
+              <small ng-switch-when="Paladin"> {{c}}    <small ng-repeat="o in x.oaths">{{o}}, </small></small>
+              <small ng-switch-when="Warlock"> {{c}}    <small ng-repeat="p in x.patrons">{{p}}, </small></small>
+            </p>
+        </div>
+            <br><br><br>
+      </div>
+    </spell>
+
+
+  </body>
+</html>
