@@ -27,10 +27,14 @@ app.controller('controller', function ($scope, $http) {
     }
   };
 
-$scope.reverse = true;
+$scope.reverse = false;
 
 $scope.sortBy = function() {
-  $scope.reverse = ($scope.spellorderby) ? !$scope.reverse : false;
+  console.log("this is a test");
+  $scope.reverse = ($scope.spellorderby) ? !$scope.reverse : true;
+  document.getElementById("orderbyicon").classList.toggle('uk-icon-caret-up');
+  document.getElementById("orderbyicon").classList.toggle('uk-icon-caret-down');
+
 };
 $scope.orderFunc = function(input){
   if ($scope.spellorderby == 'challenge') {
