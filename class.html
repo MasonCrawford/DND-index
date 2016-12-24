@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Class page</title>
+
+    <link href="/favicon.ico" rel="shortcut icon">
+
+    <!-- link all the styles -->
+    <link rel="stylesheet" href="assets/css/main.min.css" />
+    <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" />
+
+    <!-- link all the scripts -->
+    <script src="assets\js\1-tools\jquery-2.1.4.min.js"></script>
+    <script src="assets\js\1-tools\uikit\uikit.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script src=//ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js></script>
+    <script type="text/javascript" src="assets\js\3-pages\classpage.js"></script>
+
+  </head>
+  <body ng-app="classpagemodule" ng-controller="classlistcon">
+    <div class="uk-panel" ng-controller="MainClassController">
+      <div class="uk-panel-badge uk-badge"></div>
+      <h3 class="uk-panel-title">{{class}}</h3>
+      <p>{{hd}}</p>
+      <p></p>
+    </div>
+  </body>
+</html>
