@@ -17,16 +17,21 @@
     <script src="assets\js\1-tools\jquery-2.1.4.min.js"></script>
     <script src="assets\js\1-tools\uikit\uikit.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <script src=//ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js></script>
+    <!-- <script src=//ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js></script> -->
     <script type="text/javascript" src="assets\js\3-pages\classpage.js"></script>
-
   </head>
-  <body ng-app="classpagemodule" ng-controller="classlistcon">
-    <div class="uk-panel" ng-controller="MainClassController">
-      <div class="uk-panel-badge uk-badge"></div>
-      <h3 class="uk-panel-title">{{class}}</h3>
-      <p>{{hd}}</p>
-      <p></p>
+  <body ng-app="classpagemodule" ng-controller="classlistcon" class="uk-container uk-container-center">
+    <div ng-repeat="x in dndclasses">
+      <div ng-repeat="s in x.subclass">
+        <div class="uk-article">
+          <h1 class="uk-article-title">{{s.subclass}}</h1>
+          <p class="uk-article-meta">{{x.class}}<p>
+          <p ng-mo class="uk-article-lead">Hit die of {{x.hd|suboveride:s.hd}} {{x.caster|suboveride:s.caster|makesen:'caster'}} caster, {{x.prepared|suboveride:s.prepared}} prepared spells {{x.learnspells|suboveride:s.learnspells}} learn's spells </p>
+          <p></p>
+          <hr class="uk-article-divider">
+          <p></p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
