@@ -1,37 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Class page</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/favicon.ico" rel="shortcut icon">
+  <title>Class page</title>
 
-    <!-- link all the styles -->
-    <link rel="stylesheet" href="assets/css/main.min.css" />
-    <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" />
+  <link href="/favicon.ico" rel="shortcut icon">
 
-    <!-- link all the scripts -->
-    <script src="assets\js\1-tools\jquery-2.1.4.min.js"></script>
-    <script src="assets\js\1-tools\uikit\uikit.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <!-- <script src=//ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js></script> -->
-    <script type="text/javascript" src="assets\js\3-pages\classpage.js"></script>
-  </head>
-  <body ng-app="classpagemodule" ng-controller="classlistcon" class="uk-container uk-container-center">
-    <div ng-repeat="x in dndclasses">
-      <div ng-repeat="s in x.subclass">
-        <div class="uk-article">
-          <h1 class="uk-article-title">{{s.subclass}}</h1>
-          <p class="uk-article-meta">{{x.class}}<p>
-          <p ng-mo class="uk-article-lead">Hit die of {{x.hd|suboveride:s.hd}} {{x.caster|suboveride:s.caster|makesen:'caster'}} caster, {{x.prepared|suboveride:s.prepared}} prepared spells {{x.learnspells|suboveride:s.learnspells}} learn's spells </p>
-          <p></p>
-          <hr class="uk-article-divider">
-          <p></p>
+  <!-- link all the styles -->
+  <link rel="stylesheet" href="assets/css/main.min.css" />
+  <link rel="stylesheet" href="assets/css/1-tools/uikit/uikit.css" />
+
+  <!-- link all the scripts -->
+  <script src="assets\js\1-tools\jquery-2.1.4.min.js"></script>
+  <script src="assets\js\1-tools\uikit\uikit.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+  <!-- <script src=//ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.js></script> -->
+  <script type="text/javascript" src="assets\js\3-pages\classpage.js"></script>
+</head>
+<body ng-app="classpagemodule" ng-controller="classlistcon" class="uk-container uk-container-center">
+  <div ng-controller="classlistcon">
+    <form class="uk-form" >
+      <div class="uk-button-group">
+        <div class="uk-button-dropdown" data-uk-dropdown={mode: 'hover'}>
+          <button class="uk-button">{{spellorderby}}</i></button>
+          <div class="uk-dropdown uk-dropdown-small">
+            <ul class="uk-nav uk-nav-dropdown">
+              <ul class="uk-nav uk-nav-dropdown">
+                <!-- <li>
+                  <a ng-click="spellorderby = 'name'">Name</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'source'">Source</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'level'">Level</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'school'">School</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'duration'">Duration</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'range'">Range</a>
+                </li>
+                <li>
+                  <a ng-click="spellorderby = 'castingTime'">Casting Time</a>
+                </li> -->
+              </ul>
+            </ul>
+          </div>
         </div>
+        <button class="uk-button" ng-class="{reverse: reverse}" ng-click="sortBy()"><i id="orderbyicon" class="uk-icon-caret-down"></i></button>
+      </div>
+    </form>
+  <div ng-repeat="x in dndclasses">
+    <div ng-repeat="s in x.subclass" class="uk-overflow-container" data-uk-scrollspy="{cls:'uk-animation-slide-right'}">
+      <div class="uk-article">
+        <h1 class="uk-article-title">{{s.subclass}}</h1>
+        <p class="uk-article-meta">{{x.class}}</p>
+        <table class="uk-table uk-table-hover">
+          <thead>
+                    <tr>
+                      <th title="Field #3">hd</th>
+                      <th title="Field #4">caster</th>
+                      <th title="Field #5">prepared</th>
+                      <th title="Field #6">learnspells</th>
+                      <th title="Field #7">healing1to10</th>
+                      <th title="Field #8">primary abilities</th>
+                      <th title="Field #9">saves</th>
+                      <th title="Field #10">armour</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+                  <td> {{x.hd|suboveride:s.hd}} </td>
+                  <td> {{x.caster|suboveride:s.caster}} </td>
+                  <td> {{x.prepared|suboveride:s.prepared}} </td>
+                  <td> {{x.learnspells|suboveride:s.learnspells}} </td>
+                  <td> {{x.healing1to10|suboveride:s.healing1to10}} </td>
+                  <td> {{x.primaryabilities|suboveride:s.primaryabilities}} </td>
+                  <td> {{x.saves|suboveride:s.saves}} </td>
+                  <td> {{x.armour|suboveride:s.armour}} </td>
+                </tr></tbody>
+                <thead>
+                    <tr>
+                      <th title="Field #11">weapons</th>
+                      <th title="Field #12">skills</th>
+                      <th title="Field #13">tools</th>
+                      <th title="Field #14">languages</th>
+                      <th title="Field #15">extraattack</th>
+                      <th title="Field #16">superiority</th>
+                      <th title="Field #17">evasion</th>
+                      <th title="Field #18">fightingstyle</th>
+                      <th title="Field #19">expertise</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+                  <td> {{x.weapons|suboveride:s.weapons}} </td>
+                  <td> {{x.skills|suboveride:s.skills}} </td>
+                  <td> {{x.tools|suboveride:s.tools}} </td>
+                  <td> {{x.languages|suboveride:s.languages}} </td>
+                  <td> {{x.extraattack|suboveride:s.extraattack}} </td>
+                  <td> {{x.superiority|suboveride:s.superiority}} </td>
+                  <td> {{x.evasion|suboveride:s.evasion}} </td>
+                  <td> {{x.fightingstyle|suboveride:s.fightingstyle}} </td>
+                  <td> {{x.expertise|suboveride:s.expertise}} </td>
+                </tr></tbody>
+            </table>
+            <p class="uk-article-meta">source {{s.source}}</p>
+        <hr class="uk-article-divider">
+        <br>
       </div>
     </div>
-  </body>
+  </div>
+  </div>
+</body>
+
 </html>
